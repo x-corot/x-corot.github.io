@@ -1,0 +1,319 @@
+\documentclass[a4paper,11pt]{article}
+
+%-----------------------------------------------------------------
+
+%Packages utilisés
+\usepackage{amsmath, amssymb, amsthm}	%Packages mathématiques
+\usepackage[utf8]{inputenc}				%Encodage UTF8
+\usepackage[francais]{babel}				%Typographie française
+\usepackage{fourier}						%Police Fourier
+\usepackage{fancyhdr}					%En-tête personnalisé
+\usepackage[margin=.8in]{geometry}		%Modification des marges
+\usepackage[usenames, dvipsnames]{color, xcolor}	%Ajout de couleurs
+\usepackage{titlesec}					%Formattage des titres
+
+%Personnalisation de l'en-tête/pied de page
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+	%En-tête
+	\fancyhead[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth} {\headheight}
+		}%
+	  	\sffamily{\color{gris}{ Lycée J-B Corot}}
+	}
+	\fancyhead[C]{\sffamily{\color{gris}{MP}}}
+	
+	%Insérer le titre ICI
+	\fancyhead[R]{\sffamily{\color{gris}{Processus de branchement}}}
+	%--------------------------------------------------
+	
+	%Pied de page
+	\fancyfoot[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth}{\headheight}
+		}%
+	  	\sffamily{\color{gris}{}}
+	}
+	\fancyfoot[C]{%
+		\strut\rlap{
+			\rule[-\dp\strutbox]{\headwidth}{0pt}
+		}%
+	  	\sffamily{\color{gris}{\thepage}}
+	}
+	\fancyfoot[R]{\sffamily{\color{gris}{}}}
+	
+%Nouvelles commandes
+	%Couleurs
+	\definecolor{gris}{HTML}{EEEEEE}
+	\definecolor{vert1}{HTML}{6AB7C3}
+	
+	%Numérotation
+	\renewcommand{\labelenumi}{\sffamily{\textbf{\color{vert1}\theenumi.}}}
+	\renewcommand{\labelenumii}{\sffamily{\textbf{\color{vert1}\theenumii.}}}
+	\renewcommand{\labelenumiii}{\sffamily{\textbf{\color{vert1}\theenumiii.}}}
+	
+	%Mathématiques
+	\newcommand{\N}{\mathbf{N}}
+	\newcommand{\Z}{\mathbf{Z}}
+	\newcommand{\R}{\mathbf{R}}
+	\newcommand{\C}{\mathbf{C}}
+	\newcommand{\Q}{\mathbf{Q}}
+	\newcommand{\K}{\mathbf{K}}
+	\newcommand{\U}{\mathbf{U}}
+	\renewcommand{\P}{\mathbf{P}}
+	\newcommand{\D}{\mathcal{D}}
+	\newcommand{\E}{\mathbf{E}}
+	\newcommand{\M}{\mathcal{M}}
+	\renewcommand{\L}{\mathcal{L}}
+	\newcommand{\suite}[2]{{\left({#1}_{#2}\right)}_{#2}}
+	
+	%Titre
+	\newcommand{\titre}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			\center{\Large{\sffamily\bfseries{\color{gris}{#1}}}}\\
+			\vspace*{1em}
+		}}
+	}
+	
+	%Corrigé
+	\newcommand{\corrige}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			{\sffamily\bfseries{\color{gris}{Solution}}}\par
+			{#1}\\
+		}
+		}
+		
+	}
+	
+	%Fin
+	\newcommand{\fin}{
+	\begin{center}
+	\vspace*{2em}
+	{\color{vert1}\rule{5cm}{0.2pt}}\\
+	\vspace*{1em}
+			\sffamily\bfseries{\color{vert1}{FIN DU SUJET}}
+	\end{center}
+	}
+	
+	%Formattage des titres
+	\renewcommand{\thesection}{\Roman{section}}
+	\renewcommand{\thesubsection}{\Alph{subsection}}
+	\titleformat{\section}
+  		{\normalfont\sffamily\Large\bfseries\color{vert1}}
+  		{\thesection .}{1em}{}
+  	\titleformat{\subsection}
+  		{\normalfont\sffamily\large\bfseries\color{vert1}}
+  		{\hspace{2em}\thesubsection .}{.5em}{}
+
+%Autres
+\setlength\parindent{0pt}	%Pas d'indentation des paragraphes 
+
+%-----------------------------------------------------------------
+
+\begin{document}
+\thispagestyle{empty}				%Pas d'en-tête sur la page 1
+\pagecolor{gris}						%Couleur de fond
+\titre{Processus de branchement}		%Titre du document
+\vspace*{1em}
+
+\section*{Objectif}
+Les processus de branchement sont des modèles introduits pour étudier le
+développement d’une population, dans laquelle les individus se reproduisent
+indépendamment les uns des autres.
+Ces modèles sont particulièrement utilisés en biologie (étude de la croissance
+d’une colonie de bactéries...) et en physique nucléaire, mais trouvent leur origine
+dans l’étude, au 19ème siècle, des probabilités d’extinction des noms de familles
+illustres en Grande Bretagne (Francis Galton et Henry Watson, 1874). Leur
+problème était le suivant :
+Si un homme a une probabilité $p_0$ de n’avoir aucun fils, $p_1$ d’avoir un fils, $p_2$
+d’en avoir deux, etc ; si chacun de ses fils éventuels est dans le même cas, et ainsi
+de suite ; quelle est la probabilité pour qu’à terme cette branche de la famille
+s’éteigne ? Plus généralement, comment connaître la probabilité pour qu’il y ait
+exactement $k$ individus à la génération $n$ ?
+
+\section*{Notations}
+Dans tout le problème, on se place dans un espace probabilisé $(\Omega,\mathcal{A},\P)$.\\
+
+On considère une suite $\suite{Z}{n}$ de variables aléatoires, $Z_n$ modélisant le nombre d'individus de la population à la génération $n$. On fait alors les hypothèses suivantes:
+\begin{itemize}
+\item[•] Tous les individus, quel que soit la génération à laquelle ils appartiennent,
+se comportent a priori de la même façon (i.e. leur nombre de fils a la
+même loi de probabilité).
+\item[•] Le comportement d’un individu donné n’est en rien influencé par celui
+d’autres individus, que ce soit de sa propre génération ou des générations
+antérieures.
+\item[•] Ce comportement n’est pas non plus affecté par le nombre d’individus.
+\end{itemize}
+En particulier, les descendances de deux individus distincts sont des phénomènes
+indépendants.
+
+On considère une suite $\suite{p}{k}$ de réels positifs ou nuls telle que $\displaystyle\sum_{k=0}^{+\infty}=1$. Chaque individu, au cours du processus, aura une probabilité $p_k$
+d’avoir $k$ enfants.\\
+
+On suppose dans la suite du problème que $Z_0=1$, ce qui donne, pour tout $k\in\N$, $\P(Z_1=k)=p_k$.\\
+
+Si $X$ est une variable aléatoire entière et positive sur $(\Omega,\mathcal{A},\P)$, on notera $F_X$, série entière de rayon de
+convergence au moins $1$, la fonction génératrice de $X$. On rappelle que la fonction génératrice de $X$ est la
+somme de la série entière
+\[\forall t\in[-1,1],\ F_X(t)=\displaystyle\sum_{k=0}^{+\infty}\P(X=k)t^k.\]
+
+Si $f:I\rightarrow\R$ est une fonction à valeurs réelles, on dit que $f$ est convexe sur $I$ si
+\[\forall x,y\in I,\ \forall\lambda\in[0,1],\ f(\lambda x+(1-\lambda)y)\leq\lambda f(x)+(1-\lambda)f(y).\]
+
+Si $f:I\rightarrow\R$ est une fonction à valeurs réelles, on dit que $f$ est strictement convexe sur $I$ si
+\[\forall x,y\in I,\ \forall\lambda\in[0,1],\ f(\lambda x+(1-\lambda)y)<\lambda f(x)+(1-\lambda)f(y).\]
+
+\begin{enumerate}
+\setcounter{enumi}{-1}
+\item Justifier que, pour tout $n\in\N$, $\omega\in\Omega$,
+\[Z_{n+1}(\omega)=\begin{cases}
+	0&\text{ si }Z_1(\omega)=0\\
+	\displaystyle\sum_{k=1}^{Z_1(\omega)}Z_{n,k}(\omega)&\text{ si }Z_1(\omega)\neq 0
+\end{cases}.\]
+où les $Z_{n,k}$ sont des variables aléatoires indépendantes de même loi que $Z_n$.
+\end{enumerate}
+Ainsi, si l'on connaît $Z_n$, le comportement de la variable $Z_{n+1}$ est absolument indépendant de $Z_0,Z_1,\cdots,Z_{n-1}$.\\
+
+\section{Quelques résultats de convexité}
+Dans cette partie, $I$ désigne un intervalle non trivial de $\R$. On se donne une fonction $f:I\rightarrow\R$ de classe $\mathcal{C}^1$.
+
+\begin{enumerate}
+\item On suppose que $f$ est de classe $\mathcal{C}^2$ sur $I$. Montrer que $f$ est convexe si, et seulement si, $f''$ est positive.
+\item On revient au cas général. Montrer que $f$ est convexe si, et seulement si, $f'$ est croissante.
+\item On suppose que $f$ est convexe. Montrer que $f$ est au-dessus de sa tangente en tout point de $I$.
+\end{enumerate}
+
+\section{Généralités sur les fonctions génératrices}
+Dans toute cette partie, on se donne une variable aléatoire $X$ sur $(\Omega,\mathcal{A},\P)$.
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item Montrer que, pour tout $t\in[-1,1]$, $F_X(t)=\E(t^X)$.
+\item Montrer que $F_X$ est strictement croissante et convexe sur $[0,1]$.
+\item \begin{enumerate}
+\item Donner la valeur de $F_X(0)$.
+\item Montrer que $F_X$ est continue en $1$.
+\item En déduire la valeur de $F_X(1)$.
+\end{enumerate}
+\item On suppose que $X$ admet une espérance finie. 
+\begin{enumerate}
+\item Montrer que $\E(X)=\lim\limits_{t\to 1}{F_X}'(t)$.
+\item En déduire que $\E(X)={F_X}'(1)$.
+\end{enumerate}
+\item On suppose que $X$ admet une variance finie. En particulier, $X$ admet une espérance finie, donc les résultats précédents restent vrais.
+\begin{enumerate}
+\item Déterminer $\lim\limits_{t\to 1}{F_X}''(t)$.
+\item Montrer alors que $\mathrm{Var}(X)={F_X}''(1)-\left({F_X}'(1)\right)^2+{F_X}'(1)$.
+\end{enumerate}
+\item Soit $Y$ une variable aléatoire indépendante de $X$. 
+\begin{enumerate}
+\item Montrer que $F_{X+Y}=F_XF_Y$.
+\item Montrer que, pour tout $n\in\N$, $X_1,\cdots,X_n$ des variables aléatoires mutuellement indépendantes, de somme $S_n$, on a $F_{S_n}=F_{X_1}\cdots F_{X_n}$.
+\end{enumerate}
+\end{enumerate}
+
+\section{Cas des processus de branchement}
+\subsection{Fonctions génératrices des variables $Z_n$}
+On considère la fonction $F=F_{Z_1}$, donnée par l'expression $F(t)=\displaystyle\sum_{k=1}^{+\infty}p_kt^k$, pour tout $t\in[-1,1]$. On définit alors la suite de fonctions $\suite{F}{n}$ par la relation de récurrence \[F_0=\mathrm{id}_{[-1,1]}\text{ et }F_{n+1}=F\circ F_n\text{ pour tout }n\in\N.\]
+On se propose de montrer que, pour tout $n\in\N$, $F_{Z_n}=F_n$. Pour cela, on procède par récurrence sur $n$.
+\begin{enumerate}
+\setcounter{enumi}{9}
+\item Montrer que $F_{Z_0}=F_0$ et que $F_{Z_1}=F_1$.
+\item Soit $n\geq 2$. Supposons le résultat vrai pour tout $m<n$. Pour tout $i\in\N$, on définit la variable aléatoire $Y_{n,i}$ par
+\[\forall k\in\N,\ \P(Y_{n,i}=k)=\P(Z_n=k\vert Z_1=i).\]
+\begin{enumerate}
+\item Montrer que, pour tout $k\in\N$, $\P(Z_n=k)=\displaystyle\sum_{i\in I}\P\left(Y_{n,i}=k\right)p_i$, avec $I=\{i\in\N\ \vert\ p_i>0\}$.
+\item Montrer que, pour tout $i\in\N$, $t\in[-1,1]$, $F_{Y_{n,i}}(t)=\left( F_{n-1}(t)\right)^i$.
+\item Montrer que, pour tout $t\in[-1,1]$, $F_{Z_n}(t)=\displaystyle\sum_{i\in I}p_i\left( F_{n-1}(t)\right)^i$.
+\item Conclure.
+\end{enumerate}
+\end{enumerate}
+
+\subsection{Un exemple}
+On suppose que, pour tout $i\in\N$, $p_i=\frac{1}{2^{i+1}}$.
+\begin{enumerate}
+\setcounter{enumi}{11}
+\item Vérifier que l'on définit bien une loi de probabilité.
+\item Déterminer $F_1$.
+\item \begin{enumerate}
+\item Vérifier que, pour tout $t\in[0,1[$, $F_n(t)\neq 1$. On peut alors poser $a_n=\frac{1}{F_n-1}$ pour tout $n\in\N$.
+\item Montrer que, pour tout $t\in[0,1[$, la suite ${\left( a_n(t)\right)}_n$ est arithmétique.
+\item En déduire que, pour $t\in[0,1[$, $F_n(t)=\frac{n-(n-1)t}{n+1-nt}$.
+\end{enumerate}
+\item Exprimer, pour $(n,k)\in\N^2$, $\P(Z_n=k)$.
+\end{enumerate}
+
+\subsection{Probabilité d'extinction}
+Dans la suite du problème, on supposera que $p_0>0$ et que $Z_1$ possède une espérance finie.
+\begin{enumerate}
+\setcounter{enumi}{15}
+\item Montrer que la probabilité d'extinction est égale à la limite de la suite ${\left( F_n(0)\right)}_n$. On notera $\alpha$ cette limite.
+\item On note $x_0$ le plus petit point fixe de $F$.
+\begin{enumerate}
+\item Justifier l'existence de $x_0$.
+\item Montrer que $\alpha\leq x_0$.
+\item En déduire que $\alpha=x_0$.
+\end{enumerate}
+\item On suppose que $\E(Z_1)< 1$. Montrer que $1$ est l'unique point fixe de $F$ et en déduire la valeur de $\alpha$.
+\item On suppose que $\E(Z_1)= 1$.
+\begin{enumerate}
+\item Montrer qu'il existe $n\geq 2$ tel que $p_n>0$.
+\item En déduire que $F$ est strictement convexe.
+\item Déterminer la valeur de $\alpha$.
+\end{enumerate}
+\item On suppose que $\E(Z_1)> 1$. On considère la fonction $\varphi:\ t\in[0,1[\mapsto\frac{1-F(t)}{1-t}$.
+\begin{enumerate}
+\item Montrer que $\varphi$ est strictement croissante.
+\item En déduire l'existence d'un unique point fixe $x_0$ de $F$ sur $[0,1[$. On a donc $\alpha=x_0<1$.
+\end{enumerate}
+\end{enumerate}
+
+\section{Cas sur-critique ($\E(Z_1)>1$)}
+On suppose ici que $\E(Z_1)>1$. Dès lors, $\alpha<1$.\\
+
+Dans toute cette partie, on fixe un entier naturel non nul $k$ et on définit de manière analogue aux $Z_n$ une suite de variables aléatoires $\suite{Z'}{n}$, vérifiant cependant ${Z'}_0=k$. On admet que, hormis cette dernière hypothèse, les résultats démontrés précédemment pour les $Z_n$ restent valables pour les ${Z'}_n$.\\
+
+On définit de plus une suite $\suite{u}{n}$ par $u_0=1$ et, pour tout $n\in\N^*$,
+\[u_{n}=\P\left({Z'}_n=k\text{ et }{Z'_i}\neq k\text{ pour tout }0<i<n\right),\]
+et $u=\displaystyle\sum_{n=1}^{+\infty}u_n$.\\
+
+Pour tout $n,r\in\N^*$, on définit $u_n^{(r)}$ comme la probabilité pour que la suite $\suite{Z'}{n}$ prenne la valeur $k$ pour la $r$-ième fois au rang $n$. \\
+
+Enfin, on pose $U(t)=\displaystyle\sum_{n=1}^{+\infty}u_nt^n$ et $U_r(t)=\displaystyle\sum_{n=1}^{+\infty}u_n^{(r)}t^n$, pour tout $t\in[-1,1]$ et $r\in\N^*$.
+
+\begin{enumerate}
+\setcounter{enumi}{20}
+\item Montrer que, pour tout $n\in\N$, $\E(Z_n)=\alpha^n$.
+\item Vérifier que les séries $\displaystyle\sum_{n\geq 1}u_nt^n$ et $\displaystyle\sum_{n\geq 1}u_n^{(r)}t^n$ convergent quand $t\in[-1,1]$.
+\item 
+\begin{enumerate}
+\item Justifier que $u$ est bien défini.
+\item Montrer que la probabilité que la suite ${\left({Z'}_n\right)}_{n\in\N^*}$ ne prenne pas la valeur $k$ est non nulle. Ainsi, on a $u<1$.
+\item Ce résultat subsiste-t-il si l'on suppose que $p_0=0$ ?
+\end{enumerate}
+\item \begin{enumerate}
+\item Soit $n\in\N^*$ et $r$ un entier supérieur ou égal à $2$. Montrer la relation
+\[u_n^{(r)}=\displaystyle\sum_{i=1}^{n-1}u_iu_{n-i}^{(r-1)}.\]
+\item En déduire que, pour tout entier $r$ strictement positif, $U_r=U^r$ ($U^r$ désigne $U\times U\times\cdots\times U$ $r$ fois).
+\end{enumerate}
+\item
+\begin{enumerate}
+\item Montrer que la probabilité que la suite $\suite{Z'}{n}$ prenne la valeur $k$ une infinité de fois est nulle.
+\item Montrer que la probabilité que la suite $\suite{Z}{n}$ prenne la valeur $k$ une infinité de fois est nulle.
+\end{enumerate}
+\item Soit $\suite{A}{n}$ une suite d'événements, tous de probabilité $1$. Que peut-on dire de $\P\left(\displaystyle\bigcap _{n\in\N}A_n\right)$ ?
+\item Montrer que $\P\left(\lim\limits_{n\to+\infty}Z_n=+\infty\right)=1-\alpha$.
+\end{enumerate}
+
+On a ainsi montré que, contrairement au cas sous-critique ($\E(Z_1)\leq 1$) où la population est vouée à s'éteindre presque sûrement, la suite $\suite{Z}{n}$ converge vers $0$ avec une probabilité $\alpha<1$. Le cas contraire, elle diverge vers $+\infty$ avec une probabilité $1-\alpha$.
+
+\fin
+\vspace*{\fill}
+\begin{tiny}
+Ce sujet est largement inspiré de l'excellent document disponible à l'adresse suivante: http://culturemath.ens.fr/maths/pdf/proba/watson.pdf (que j'ai eu l'occasion d'étudier au cours de l'épreuve d'ADS de l'École polytechnique), ainsi que la remarquable épreuve de Mathématiques 1 – PSI – Centrale 2015.
+\end{tiny}
+\end{document}

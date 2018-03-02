@@ -1,0 +1,446 @@
+\documentclass[a4paper,11pt]{article}
+
+%-----------------------------------------------------------------
+
+%Packages utilisés
+\usepackage{amsmath, amssymb, amsthm}	%Packages mathématiques
+\usepackage[utf8]{inputenc}				%Encodage UTF8
+\usepackage[francais]{babel}				%Typographie française
+\usepackage{fourier}						%Police Fourier
+\usepackage{fancyhdr}					%En-tête personnalisé
+\usepackage[margin=.8in]{geometry}		%Modification des marges
+\usepackage[usenames, dvipsnames]{color, xcolor}	%Ajout de couleurs
+\usepackage{titlesec}					%Formattage des titres
+
+%Personnalisation de l'en-tête/pied de page
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+	%En-tête
+	\fancyhead[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth} {\headheight}
+		}%
+	  	\sffamily{\color{gris}{ Lycée J-B Corot}}
+	}
+	\fancyhead[C]{\sffamily{\color{gris}{MP}}}
+	
+	%Insérer le titre ICI
+	\fancyhead[R]{\sffamily{\color{gris}{Autour des matrices de Frobenius}}}
+	%--------------------------------------------------
+	
+	%Pied de page
+	\fancyfoot[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth}{\headheight}
+		}%
+	  	\sffamily{\color{gris}{}}
+	}
+	\fancyfoot[C]{%
+		\strut\rlap{
+			\rule[-\dp\strutbox]{\headwidth}{0pt}
+		}%
+	  	\sffamily{\color{gris}{\thepage}}
+	}
+	\fancyfoot[R]{\sffamily{\color{gris}{}}}
+	
+%Nouvelles commandes
+	%Couleurs
+	\definecolor{gris}{HTML}{EEEEEE}
+	\definecolor{vert1}{HTML}{666666}
+	
+	%Numérotation
+	\renewcommand{\labelenumi}{\sffamily{\textbf{\color{vert1}\theenumi.}}}
+	\renewcommand{\labelenumii}{\sffamily{\textbf{\color{vert1}\theenumii.}}}
+	\renewcommand{\labelenumiii}{\sffamily{\textbf{\color{vert1}\theenumiii.}}}
+	
+	%Mathématiques
+	\newcommand{\N}{\mathbf{N}}
+	\newcommand{\Z}{\mathbf{Z}}
+	\newcommand{\R}{\mathbf{R}}
+	\newcommand{\C}{\mathbf{C}}
+	\newcommand{\Q}{\mathbf{Q}}
+	\newcommand{\K}{\mathbf{K}}
+	\newcommand{\U}{\mathbf{U}}
+	\renewcommand{\P}{\mathbf{P}}
+	\newcommand{\D}{\mathcal{D}}
+	\newcommand{\E}{\mathbf{E}}
+	\newcommand{\M}{\mathcal{M}}
+	\newcommand{\B}{\mathcal{B}}
+	\newcommand{\CC}{\mathcal{C}}
+	\renewcommand{\L}{\mathcal{L}}
+	\newcommand{\suite}[2]{{\left({#1}_{#2}\right)}_{#2}}
+	
+	%Titre
+	\newcommand{\titre}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			\center{\Large{\sffamily\bfseries{\color{gris}{#1}}}}\\
+			\vspace*{1em}
+		}}
+	}
+	
+	%Corrigé
+	\newcommand{\corrige}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			{\sffamily\bfseries{\color{gris}{Théorème}}}\par
+			{#1}\\
+		}
+		}
+		
+	}
+	
+	%Fin
+	\newcommand{\fin}{
+	\begin{center}
+	\vspace*{2em}
+	{\color{vert1}\rule{5cm}{0.2pt}}\\
+	\vspace*{1em}
+			\sffamily\bfseries{\color{vert1}{FIN DU CORRIGÉ}}
+	\end{center}
+	}
+	
+	%Formattage des titres
+	\renewcommand{\thesection}{\Roman{section}}
+	\renewcommand{\thesubsection}{\Alph{subsection}}
+	\titleformat{\section}
+  		{\normalfont\sffamily\Large\bfseries\color{vert1}}
+  		{\thesection .}{1em}{}
+  	\titleformat{\subsection}
+  		{\normalfont\sffamily\large\bfseries\color{vert1}}
+  		{\hspace{2em}\thesubsection .}{.5em}{}
+
+%Autres
+\setlength\parindent{0pt}	%Pas d'indentation des paragraphes 
+
+%-----------------------------------------------------------------
+
+\begin{document}
+\thispagestyle{empty}				%Pas d'en-tête sur la page 1
+\pagecolor{gris}						%Couleur de fond
+\titre{Autour des matrices de Frobenius – Corrigé}		%Titre du document
+\vspace*{1em}
+
+\section{Préliminaires}
+\begin{enumerate}
+\item \begin{itemize}
+\item[•] $\Phi$ est linéaire par linéarité du produit scalaire.
+\item[•] Soit $x\in E$ tel que $\phi_x=0$. Alors $\phi_x(x)=(x\vert x)=0$, donc $x=0$. Donc $\Phi$ est injective.
+\item[•] Soit $\phi\in E^*$. Comme $\mathrm{Ker}\phi$ est de dimension $n-1$, on peut choisir $x'\in E$ tel que $E=\mathrm{Ker}\phi\overset{\perp}{\oplus}\mathrm{Vect}(x')$. Posons alors $x=\frac{\phi(x')}{(x'\vert x')}$. Pour tout $y=a+\lambda x\in E$, on a alors
+\[
+\phi_x(y)=(x\vert y)=\lambda\frac{\phi(x')^2}{(x'\vert x')}=\phi\left(\lambda x\right)=\phi(y).
+\] 
+\end{itemize}
+Ainsi, 
+\begin{center}
+\fbox{$\Phi$ est un isomorphisme, et $\mathrm{dim}E^*=n$.}
+\end{center}
+\item 
+\begin{enumerate}
+\item 
+\begin{itemize}
+\item[•] Si $x\in F\cap F\perp$, alors $(x\vert x)=0$, donc $x=0$.
+\item[•] Soit $x\in E$. Considérons l'application ${\phi_x}_{\vert F}\in F^*$. La question {\sffamily\bfseries 1.} donne l'existence de $y\in F$ tel que ${\phi_x}_{\vert F}={\phi_y}_{\vert F}$. Dès lors, ${\phi_x}_{\vert F}-{\phi_y}_{\vert F}={\phi_{x-y}}_{\vert F}=0$, donc $x-y\in F^\perp$, et $x=y+(x-y)$.
+\end{itemize}
+Ainsi,
+\[\boxed{E=F\oplus F^\perp.}\]
+\item Le théorème du rang donne donc
+\[\boxed{\mathrm{dim}F^\perp = n-d.}\]
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item Soit $x\in E$. On a
+\[
+x\in A^\circ\Leftrightarrow\forall\phi\in A,\ \phi(x)=0
+\Leftrightarrow\forall y\in\Phi^{-1}(A),\ \phi_y(x)=0
+\Leftrightarrow x\in\left(\Phi^{-1}(A)\right)^\perp .
+\]
+Donc
+\[\boxed{A^\circ=\left(\Phi^{-1}(A)\right)^\perp.}\]
+\item Les questions {\sffamily\bfseries 1.} et {\sffamily\bfseries 2.b.} donnent successivement $\dim\Phi^{-1}(A)=\dim A=d$ puis $\dim\left(\Phi^{-1}(A)\right)^\perp=n-d$. Ainsi,
+\[\boxed{\dim A^\circ=n-d.}\]
+\end{enumerate}
+\item Soit $P\in\K[X]$.
+\begin{itemize}
+\item[•] Pour tout $x=x_F+x_G\in E$, $P(\varphi)(x)=P(\varphi)(x_F)+P(\varphi)(x_G)\in P(\varphi)(F)+P(\varphi)(G)$.
+\item[•] La stabilité de $F$ et $G$ par $\varphi$ donne $\dim P(\varphi)(F)\leq \dim F$ et $\dim P(\varphi)(G)\leq \dim G$. Dès lors, \[n=\dim(P(\varphi)(F)+P(\varphi)(G))\leq\dim P(\varphi)(F)+\dim P(\varphi)(G)\leq\dim F+\dim G=n.\]
+Dès lors, la formule de Grassmann donne $\dim(F\cap G)=0$, donc $F\cap G=0$.
+\end{itemize}
+En définitive,
+\[\boxed{\forall P\in\K[X],\ P(\varphi)(E)=P(\varphi)(F)\oplus P(\varphi)(G).}\]
+\end{enumerate}
+
+\section{Endomorphismes et matrices cycliques}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item Pour tout $P\in\K[X]$ unitaire, en développant $\chi_{C_P}=\det(XI_n-C_P)$ selon sa dernière colonne, on obtient aisément
+\[\boxed{\chi_{C_P}=P.}\]
+\item
+\begin{enumerate}
+\item Soit $P\in\K[X]$ tel que $M_\B(\varphi)=C_P$. En notant $e_1,\cdots,e_n$ les éléments de $\B$ dans l'ordre, on obtient $e_{i+1}=\varphi(e_i)$ pour tout $1\leq i<n$. Ainsi
+\begin{center}
+\fbox{$\varphi$ est un endomorphisme cyclique.}
+\end{center}
+\item
+\begin{enumerate}
+\item Comme $\phi^n(x)\in E$, on peut noter $\phi^n(x)=-a_0x-\cdots-a_{n-1}\phi^{n-1}(x)$. En posant $P=X^n+\displaystyle\sum_{k=0}^{n-1}a_kX^k$, on a donc $M_\B(\varphi)=C_P$. Donc
+\begin{center}
+\fbox{il existe $P\in\K[X]$ tel que $M_\B(\varphi)=C_P$.}
+\end{center}
+\item Toute matrice cyclique est de la forme $M_{\B'}(\varphi')$, où $\varphi'$ est un endomorphisme cyclique de $E$. En choisissant $\B$ une base comme celle donnée en énoncé et en posant $Q$ la matrice de passage de $\B$ vers $\B'$, on a $M_\B(\varphi')=QM_{\B'}(\varphi')Q^{-1}$, et la question {\sffamily\bfseries i.} permet de conclure:
+\begin{center}
+\fbox{toute matrice cyclique est semblable à une matrice compagnon.}
+\end{center}
+\end{enumerate}
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item Soit $x\in E$.
+\begin{itemize}
+\item[•] $I_{\varphi,x}$ est clairement un sous-groupe additif de $\K[X]$.
+\item[•] Si $P\in I_{\varphi,x}$, $Q\in\K[X]$, alors $QP(\varphi)(x)=Q(\varphi)\circ P(\varphi)(x)=0$, donc $QP\in I_{\varphi,x}$.
+\end{itemize}
+Ainsi,
+\begin{center}
+\fbox{pour tout $x\in E$, $I_{\varphi,x}$ est un idéal de $\K[X]$.}
+\end{center}
+\item Considérons un élément $P$ de $I_{\varphi,x}$ de degré minimal, et $Q\in I_{\varphi,x}$. En notant $Q=PR+S$ la division euclidienne de $Q$ par $P$, on a $S\in I_{\varphi,x}$ donc $S=0$. Dès lors, $I_{\varphi,x}=P\cdot\K[X]$, d'une part, et tous les éléments de $I_{\varphi,x}$ de degré minimal sont égaux à une constante multiplicative près, d'autre part. Ainsi,
+\begin{center}
+\fbox{il existe un unique $\pi_{\varphi,x}\in\K[X]$ unitaire tel que $I_{\varphi,x}=\pi_{\varphi,x}\cdot\K[X]$.}
+\end{center}
+\item 
+\begin{enumerate}
+\item Comme $\pi_\varphi(\varphi)=0$ d'après le théorème de Cayley-Hamilton, il vient, à l'aide de la question {\sffamily\bfseries b.},
+\begin{center}
+\fbox{$\pi_\varphi\in I_{\varphi,x}$ et $\pi_{\varphi,x}\vert\pi_\varphi$.}
+\end{center}
+\item Les $\pi_{\varphi,x}$ étant tous des diviseurs unitaires de $\pi_\varphi$, il sont en nombre fini. Notons-les $\pi_{\varphi,x_1},\cdots,\pi_{\varphi,x_k}$. Comme, de plus, tout $x\in E$ est dans $\mathrm{Ker}\left(\pi_{\varphi,x}(\varphi)\right)$, il vient
+\[\boxed{E=\displaystyle\bigcup_{i=1}^k\mathrm{Ker}\left(\pi_{\varphi,x_i}(\varphi)\right).}\]
+\item Notons $F_i=\mathrm{Ker}\left(\pi_{\varphi,x_i}(\varphi)\right)$, pour tout $1\leq i\leq k$. Alors
+\begin{itemize}
+\item[•] ou bien $F_1=E$.
+\item[•] ou bien $F_1\neq E$, et on peut choisir $x\in E\setminus F_1=F_2\cup\cdots\cup F_k$. Soit alors $y\in F_1$. Pour tout $1\leq i\leq k$, $y-ix\in F_2\cup\cdots\cup F_k$, car sinon, $x=\frac{1}{i}(y-(y-ix))\in F_1$. Le principe des tiroirs assure l'existence de $i_1\neq i_2$ et $2\leq j\leq k$ tels que $y-i_1x,y-i_2x\in F_j$. Dès lors, \[y=\frac{1}{i_2-i_1}(i_2(y-i_1x)-i_1(y-i_2x))\in F_j\subset F_2\cup\cdots\cup F_k.\]
+Ainsi, $F_1\subset F_2\cup\cdots\cup F_k$ et $E=F_2\cup\cdots\cup F_k$. On réitère le procédé, et on montre ainsi qu'
+\end{itemize}
+\begin{center}
+\fbox{il existe $1\leq i\leq k$ tel que $E=F_i$.}
+\end{center}
+En particulier, $\pi_{\varphi,x_i}$ est un polynôme annulateur de $\varphi$, donc
+\[\boxed{\pi_\varphi\vert\pi_{\varphi,x_i}.}\]
+\item Les questions {\sffamily\bfseries i.} et {\sffamily\bfseries iii.} donnent $\pi_{\varphi,x_i}\vert\pi_\varphi$ et $\pi_\varphi\vert\pi_{\varphi,x_i}$. Comme $\pi_\varphi$ $\pi_{\varphi,x_i}$ sont tous deux unitaires, on a 
+\[\boxed{\pi_\varphi=\pi_{\varphi,x_i}.}\]
+\end{enumerate}
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item Choisissons $x\in E$ tel que $\{x,\varphi(x),\cdots,\varphi^{n-1}(x)\}$ soit une base de $E$. Alors la liberté de cette famille montre que l'unique $P\in\K[X]$ de degré strictement inférieur à $n$ tel que $P(\varphi)(x)=0$ est le polynôme nul. Ainsi, $\pi_\varphi$ est de degré au moins $n$. Comme, de plus, $\pi_\varphi\vert\chi_\varphi$, et que ces deux polynômes sont unitaires,
+\begin{center}
+\fbox{$\pi_\varphi$ est de degré $n$ et $\pi_\varphi=\chi_\varphi$.}
+\end{center}
+\item 
+\begin{enumerate}
+\item La question {\sffamily\bfseries 7.} donne $x\in E$ tel que $\pi_\varphi=\pi_{\varphi,x}$. De plus, $\pi_\varphi=\chi_\varphi$ est de degré $n$ et divise en particulier tout élément non nul de $I_{\varphi,x}$, qui est donc de degré au moins $n$. Ainsi,
+\begin{center}
+\fbox{il existe $x\in E$ tel que tout élément non nul de $I_{\varphi,x}$ soit de degré au moins $n$.}
+\end{center}
+\item Si $P\in\K[X]$ est de degré au plus $n-1$ et si $P(\varphi)(x)=0$, alors, d'après la question {\sffamily\bfseries i.}, $P$ est le polynôme nul. Autrement dit, $\B$ est une famille libre. Comme elle possède $n$ éléments, 
+\begin{center}
+\fbox{$\B=\left\lbrace x,\varphi(x),\cdots,\varphi^{n-1}(x)\right\rbrace$ est une base de $E$, et $\varphi$ est \textit{a fortiori} cyclique.}
+\end{center}
+\end{enumerate}
+\item $C_P$ étant une matrice compagnon, on a $\pi_{C_P}=\chi_{C_P}$. La question {\sffamily\bfseries 5.} donne donc
+\[\boxed{\pi_{C_P}=P.}\]
+\end{enumerate}
+\end{enumerate}
+
+\section{Théorème de décomposition de Frobenius}
+\begin{enumerate}
+\setcounter{enumi}{8}
+\item 
+\begin{itemize}
+\item[•] $E_y$ est clairement un sous-espace vectoriel de $E$.
+\item[•] Pour tout $P\in\K[X]$, $\varphi\circ P(\varphi)(y)=(XP)(\varphi)(y)$, donc $E_y$ est stable par $\varphi$.
+\item[•] Pour $P=1$, on a $P(\varphi)=\mathrm{id}_E$, donc $y\in E_y$.
+\item[•] Tout sous-espace vectoriel de $E$ stable par $\varphi$ et contenant $y$ contient \textit{a fortiori} tous les $\varphi^k(y)$, et donc, par linéarité, contient $E_y$.
+\end{itemize}
+Ainsi,
+\begin{center}
+\fbox{$E_y$ est le plus petit sous-espace vectoriel de $E$ stable par $\varphi$ et contenant $y$.}
+\end{center}
+\item La question {\sffamily\bfseries 7.} donne $y\in E$ tel que $\pi_\varphi=\pi_{\varphi,y}$. Comme $\pi_\varphi(\varphi)(y)=0$, la famille $\left\lbrace y,\varphi(y),\cdots,\varphi^{d}(y)\right\rbrace$ est liée, donc $E_y$ est de dimension au plus $d$. De plus, la famille $\left\lbrace y,\varphi(y),\cdots,\varphi^{d-1}(y)\right\rbrace$ ne saurait être liée, car sinon il existerait $P\in I_{\varphi,y}$, non nul et de degré au plus $d-1$, tel que $P(\varphi)(y)=0$, ce qui contredirait la définition de $\pi_{\varphi,y}$. Dès lors,
+\begin{center}
+\fbox{$E_y$ est de dimension $d$ et $\left\lbrace y,\varphi(y),\cdots,\varphi^{d-1}(y)\right\rbrace$ en est une base.}
+\end{center}
+\item
+\begin{enumerate}
+\item Pour tout $x\in F$, $k\in\N$, $e_d^*(\varphi^k(\varphi(x))=e_d^*(\varphi^{k+1}(x))=0$, donc
+\begin{center}
+\fbox{$F$ est stable par $\varphi$.}
+\end{center}
+\item Soit $x=x_1e_1+\cdots+x_de_d\in E_y\cap F$. Par définition des, $e_k$, pour tout $0\leq k<d$, $e_d^*(\varphi^k(x))=x_{d-k}=0$, donc $x=0$. Ainsi,
+\[\boxed{E_y\cap F=\{0\}.}\]
+\item 
+\begin{enumerate}
+\item Soit $g=g_0\mathrm{id}_E+\cdots+g_p\varphi^p\in\K[\varphi]$ tel que $T_\varphi(g)=0$. Comme $\pi_\varphi(\varphi)=0$, on peut supposer que $p<d$ (ce qui permet de montrer, au passage, en utilisant la définition du polynôme minimal comme polynôme annulateur de plus petit degré, que $\K[\varphi]$ est de dimension $d$). En évaluant en $y$, on obtient $e_d^*(g_0e_1+\cdots+g_pe_{p+1})=0$, donc $g_0e_1+\cdots+g_pe_{p+1}\in E_y\cap F=\{0\}$. Donc $g_0e_1+\cdots+g_pe_{p+1}=0$, et par liberté de $\{e_1,\cdots,e_{p+1}\}$, $g_0=\cdots=g_p=0$. D'où $g=0$. Finalement, on obtient, grâce au théorème du rang, que
+\begin{center}
+\fbox{$T_\varphi$ est injectif et donc de rang $d$.}
+\end{center}
+\item Soit $x\in E$.
+\begin{itemize}
+\item[•] Si $x\in\left(\mathrm{Im}T_\varphi\right)^\circ$, alors, pour tout $g\in\K[\varphi]$, $e_d^*\circ g(x)=0$. En particulier, pour tout $k\in\N$, $e_d^*\circ\varphi^k(x)=0$, donc $x\in F$.
+\item[•] Si $x\in F$, alors, par linéarité de $\varphi$, pour tout $g\in\K[\varphi]$, $e_d^*\circ g(x)=0$, donc $x\in\left(\mathrm{Im}T_\varphi\right)^\circ$.
+\end{itemize}
+Par double inclusion, on a donc
+\[\boxed{\left(\mathrm{Im}T_\varphi\right)^\circ=F.}\]
+\item Les questions {\sffamily\bfseries i.} et {\sffamily\bfseries 3.b.} donnent $\dim\left(\mathrm{Im}T_\varphi\right)^\circ=n-d$. Autrement dit,
+\[\boxed{\dim F=n-d.}\]
+\end{enumerate}
+\item Les questions {\sffamily\bfseries b.} d'une part puis {\sffamily\bfseries 10.} et {\sffamily\bfseries c.} d'autre part donnent, en définitive,
+\[\boxed{E=E_y\oplus F.}\]
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item Les questions {\sffamily\bfseries 9.} et {\sffamily\bfseries 11.a.} montrent que $E_y$ et $F$ sont stables par $\varphi$, donc que $\varphi_{\vert E_y}$ et $\varphi_{\vert F}$ sont bien définis. Ainsi,
+\begin{center}
+\fbox{$\pi_1$ et $\pi_2$ sont bien définis.}
+\end{center}
+\item D'abord, $\pi_1\in I_{\varphi,y}$, donc $\pi_\varphi=\pi_{\varphi,y}\vert\pi_1$. De plus, $\varphi_{\vert E_y}$ est cyclique par construction, donc, d'après la question {\sffamily\bfseries 8.b.}, $\pi_1$ est de degré $d$. Comme $\pi_1$ et $\pi_\varphi$ sont tous deux unitaires et de même degré, il vient
+\[\boxed{\pi_1=\pi_\varphi.}\]
+\item Comme $F$ est stable par $\varphi$, $\pi_\varphi\left(\varphi_{\vert F}\right)=0$, donc $\pi_{\varphi_{\vert F}}\vert\pi_\varphi$. En d'autres termes,
+\[\boxed{\pi_2\vert\pi_1.}\]
+\end{enumerate}
+\item On raisonne par récurrence sur $n$.
+\begin{itemize}
+\item[•] L'initialisation est immédiate.
+\item[•] Supposons le résultat vrai pour tout $k<n$. Les questions {\sffamily\bfseries 11.} et {\sffamily\bfseries 12.} donnent $E=E_1\oplus F$, avec $E_1=E_y$, $\pi_2\vert\pi_1$ et $\pi_1$ un endomorphisme cyclique. L'hypothèse de récurrence appliquée à $F$ et $\varphi_{\vert F}$ donnent $E_2,\cdots,E_r$ des sous-espaces vectoriels de $F$, stables par $\varphi$, tels que $F=E_2\oplus\cdots\oplus E_r$ et $\pi_{i+1}\vert\pi_i$ pour $2\leq i<r$, avec $\pi_i$ un endomorphisme cyclique. Dès lors, $E_1,\cdots,E_r$ vérifient les conditions de l'énoncé.
+\end{itemize}
+Ainsi,
+\begin{center}
+\fbox{il existe des sous-espaces vectoriels $E_1,\cdots,E_r$ de $E$ qui satisfont aux conditions de l'énoncé.}
+\end{center}
+\item 
+\begin{enumerate}
+\item La question {\sffamily\bfseries 12.b.} donne $\pi_1=\psi_1=\pi_\varphi$, donc
+\[\boxed{\pi_1=\psi_1.}\]
+\item 
+\begin{enumerate}
+\item Les $G_i$ étant tous stables par $\varphi$, la question {\sffamily\bfseries 4.} donne
+\[\boxed{\pi_j(\varphi)(E)=\pi_j(\varphi)(G_1)\oplus\cdots\oplus \pi_j(\varphi)(G_s).}\]
+\item Les $F_i$ étant tous stables par $\varphi$, la question {\sffamily\bfseries 4.} donne
+\[\pi_j(\varphi)(E)=\pi_j(\varphi)(F_1)\oplus\cdots\oplus \pi_j(\varphi)(F_r).\]
+Comme, de plus, pour $j\leq i\leq r$, $\pi_i\vert\pi_j$, $\pi_j(\varphi)(F_i)=\{0\}$. Donc
+\[\boxed{\pi_j(\varphi)(E)=\pi_j(\varphi)(F_1)\oplus\cdots\oplus \pi_j(\varphi)(F_{j-1}).}\]
+\item Soit $1\leq i<j$. Par construction, $\varphi_{\vert F_i}$ et  $\varphi_{\vert G_i}$ sont cycliques. La question {\sffamily\bfseries 6.b.} montre que $M_\B(\varphi_{\vert F_i})$ (resp. $M_\B(\varphi_{\vert G_i})$) est semblable à $C_{\pi_i}$ (resp. $C_{\psi_i}$). Comme $\pi_i=\psi_i$, $\varphi_{\vert F_i}$ et  $\varphi_{\vert G_i}$ sont semblables. Donc, pour tout $P\in\K[X]$, $P(\varphi_{\vert F_i})$ et $P(\varphi_{\vert G_i})$ sont semblables, donc $\dim P(\varphi)(F_i)=\dim P(\varphi)(G_i)$.
+En particulier, cela montre que
+\[\boxed{\forall 1\leq i<j,\ \dim \pi_j(\varphi)(F_i)=\dim \pi_j(\varphi)(G_i).}\]
+\item Les questions {\sffamily\bfseries i.} à {\sffamily\bfseries iii.} donnent $\dim\pi_j(\varphi)(G_j)+\cdots+\dim\pi_j(\varphi)(G_s)=0$, d'où
+\[\boxed{\forall j\leq i\leq s,\ \dim\pi_j(\varphi)(G_i)=0.}\]
+En particulier, $\pi_j$ est un polynôme annulateur de $\varphi_{\vert G_j}$, donc
+\[\boxed{\psi_j\vert\pi_j.}\]
+\item En échangeant les rôles des $F_i$ et des $G_i$, on a $\pi_j\vert\psi_j$. Ces deux polynômes étant, de plus, unitaires, ils sont égaux,
+\begin{center}
+\fbox{d'où une contradiction.}
+\end{center}
+\end{enumerate}
+\item Quitte à ajouter le sous-espace vectoriel nul, on peut supposer que $r=s$. La question {\sffamily\bfseries b.} montre alors que 
+\[\boxed{\forall 1\leq i\leq r,\ \pi_i=\psi_i.}\]
+\end{enumerate}
+\end{enumerate}
+
+\section{Quelques propriétés topologiques}
+\begin{enumerate}
+\setcounter{enumi}{14}
+\item Soit $A\in\M_n(\C)$ et $x\in E$ tel que $\B=\left\lbrace x,Ax,\cdots,A^{n-1}x\right\rbrace$ soit une base de $E$. Considérons l'application 
+\[\varphi_x:\ M\in\M_n(\C)\mapsto\det_\B\left(x,Mx,\cdots, M^{n-1}x\right).\]
+Par continuité de $\varphi_x$ en $A$, et comme $\varphi_x(A)\neq 0$, il existe $\delta>0$ tel que, pour tout $M\in B(A,\delta)$, $\varphi_x(M)\neq 0$. Pour ces mêmes $M$, $\left\lbrace x,Mx,\cdots,M^{n-1}x\right\rbrace$ est donc une base de $E$, ce qui montre que $B(A,\delta)\subset\CC_n$. Ainsi,
+\begin{center}
+\fbox{$\CC_n$ est un ouvert de $\M_n(\C)$.}
+\end{center}
+\item
+\begin{enumerate}
+\item Soit $A=(a_{i,j})\in\mathrm{GL}_n(\C)$. Notons $a_{i,i}=\rho_{i}e^{i\theta_{i}}$ pour $1\leq i\leq n$. Quitte à trigonaliser $A$, sans perte de généralité, on peut la supposer triangulaire supérieure. Pour $t\in[0,1]$, posons 
+\[m_{i,j}(t)=
+\begin{cases}
+0&\text{ si }i>j\\
+ta_{i,j}&\text{ si }i<j\\
+\rho_{i}^te^{it\theta_{i}}&\text{ si }i=j
+\end{cases}\]
+et définissons $M:\ t\in[0,1]\mapsto M(t)=(m_{i,j}(t))$. $M$ est continue car polynomiale en les $a_{i,j}$ et à valeurs dans $\mathrm{GL}_n(\C)$, par construction. Enfin, $M(0)=I_n$ et $M(1)=A$. En définitive,
+\begin{center}
+\fbox{$\mathrm{GL}_n(\C)$ est connexe par arcs.}
+\end{center}
+\item La question {\sffamily\bfseries 6.} montre que, pour tout $A\in\CC_n$, il existe un unique $a_A\in\C^n$ et $P_A\in\mathrm{GL}_n(/C)$ tels que $A=P_AC_{a_A}{P_A}^{-1}$. On définit ainsi une application $\psi:\ (P,a)\in\mathrm{GL}_n(\C)\times\C^n\mapsto PC_aP^{-1}$. $\psi$ est clairement continue, d'image $\CC_n$. Comme $\mathrm{GL}_n(\C)\times\C^n$ est connexe par arc comme produit d'ensembles connexes par arcs,
+\begin{center}
+\fbox{$\CC_n$ est connexe par arcs.}
+\end{center}
+\end{enumerate}
+\item 
+\begin{enumerate}
+\item Comme $M$ possède $n$ valeurs propres distinctes, on a $\pi_M=\chi_M$. Dès lors, les questions {\sffamily\bfseries 8.b.} puis {\sffamily\bfseries 6.b.} montrent que $M$ est cyclique donc semblable à une matrice compagnon. Ainsi,
+\begin{center}
+\fbox{$M$ est semblable à une matrice compagnon.}
+\end{center}
+\item Soit $A\in\M_n(\C)$, que l'on peut supposer triangulaire supérieure sans perte de généralité. Notons $\lambda_1,\cdots,\lambda_n$ ses valeurs propres, éventuellement égales. Choisissons $\theta_1,\cdots,\theta_n\in\R$ tels que, pour tout $t\in[0,1]$, $k\neq l$, $\lambda_ke^{it\theta_k}\neq\lambda_le^{it\theta_l}$, et notons $A_n$ la matrice triangulaire supérieure, de coefficients identiques à $A$, mis à part les coefficients diagonaux valant $\lambda_ke^{i\frac{\theta_k}{n}}$, pour tout $n\in\N^*$. Les $A_n$ forment alors une suite de matrices de valeurs propres deux à deux distinctes, convergeant vers $A$. Ainsi,
+\begin{center}
+\fbox{l'ensemble des matrices de $\M_n(\C)$ possédant $n$ valeurs propres distinctes est dense dans $\M_n(\C)$.}
+\end{center}
+\item Notons $\mathcal{D}_n$ 'ensemble des matrices de $\M_n(\C)$ possédant $n$ valeurs propres distinctes. On a les inclusions $\mathcal{D}_n\subset\CC_n\subset\M_n(/C)$. Comme $\mathcal{D}_n$ est dense dans $\M_n(\C)$,
+\begin{center}
+\fbox{$\CC_n$ est dense dans $\M_n(\C)$.}
+\end{center}
+\end{enumerate}
+\item Considérons l'application $\psi:\ A\mapsto\chi_A$. $\psi$ est continue sur $\M_n(\C)$ car polynomiale. Dès lors, si $\varphi$ est continue, alors $\varphi-\psi$ aussi. D'après la question {\sffamily\bfseries 8.} $\CC_n=(\varphi-\psi)^{-1}(\{0\})$ donc est fermé dans $\M_n(\C)$. Comme il est, de plus, ouvert d'après la question {\sffamily\bfseries 15.} et non vide, il est égal à $\M_n(\C)$, ce qui est absurde pour $n\geq 2$.
+Ainsi,
+\begin{center}
+\fbox{$\varphi$ n'est pas continue sur $\M_n(\C)$.}
+\end{center}
+\end{enumerate}
+
+\section{Propriétés spectrales}
+\begin{enumerate}
+\setcounter{enumi}{18}
+\item Pour toute valeur propre $\lambda$ de $C_P$, les $n-1$ premières colonnes de $C_P-\lambda I_n$ étant échelonnées, celle-ci est de rang au moins $n-1$. Donc $\mathrm{Ker}(C_P-\lambda I_n)$ est de dimension au plus $1$, donc exactement $1$ par définition d'un sous-espace propre. Ainsi,
+\begin{center}
+\fbox{les sous-espaces propres de $C_P$ sont de dimension $1$.}
+\end{center}
+\item 
+\begin{enumerate}
+\item $P$ étant scindé à racines simples, $C_P$ est diagonalisable. Dès lors $C_P$ et ${C_P}^\top$ sont semblables, donc admettent les mêmes valeurs propres. Ainsi,
+\begin{center}
+\fbox{$\lambda$ est une valeur propre de ${C_P}^\top$.}
+\end{center} 
+\item Étant donné que $P(\lambda)=0$, on vérifie que 
+\begin{center}
+\fbox{$e_\lambda=\begin{pmatrix}
+1\\\lambda\\\vdots\\\lambda^{n-1}
+\end{pmatrix}$ est un vecteur propre de ${C_P}^\top$ associé à $\lambda$.}
+\end{center}
+\item En notant $G$ la matrice par colonnes $\begin{pmatrix}
+e_{\lambda_1}\vert\cdots\vert e_{\lambda_n}
+\end{pmatrix}$ où $\lambda_1,\cdots,\lambda_n$ désignent les valeurs propres de $C_P$, on a 
+\[G^\top=\begin{pmatrix}
+1&\lambda_1&\cdots&\lambda_1^n\\
+1&\lambda_2&\cdots&\lambda_2^n\\
+\vdots&&&\vdots\\
+1&\lambda_n&\cdots&\lambda_n^n\\
+\end{pmatrix}.\]
+Ainsi,
+\begin{center}
+\fbox{${C_P}^\top=GDG^{-1}$, avec
+$D=\begin{pmatrix}
+\lambda_1&&0\\
+&\ddots\\
+0&&\lambda_n
+\end{pmatrix}$ et $G^\top$ est une matrice de Vandermonde.}
+\end{center}
+\end{enumerate}
+\item Soit $\lambda$ une racine de multiplicité $\alpha>1$ de $P$, égal à $\pi_{C_P}$ d'après la question {\sffamily\bfseries 8.c.}. La question {\sffamily\bfseries 19.} donne $\dim\mathrm{Ker}(C_P-\lambda I_n)=1<\alpha$, donc
+\begin{center}
+\fbox{$C_P$ n'est pas diagonalisable.}
+\end{center}
+\end{enumerate}
+
+\fin
+\end{document}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Lycée</title>
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+	<link href = "..\logo.png" rel="icon">
+	<link rel="stylesheet" href="lycee_style.css" />
+</head>
+<body>
+	<script type="text/javascript">
+        var slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            var dots = document.getElementsByClassName("dot");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" actived", "");
+            }
+            slides[slideIndex - 1].style.display = "block";
+            dots[slideIndex - 1].className += " actived";
+        }
+    </script>
+
+    <div class="banner">Lycée <a href="..\index.html"><img src="..\logo.png" /></a></div>
+
+    <div class="slideshow-container">
+        <div class="mySlides fade" style="display: block;">
+            <a href="#"><img src="lycee_build.png" style="width:100%;height: 250px;">
+                <div class="text">Ce site est en construction</div>
+            </a>
+        </div>
+
+        <div class="mySlides fade" style="display: none;">
+            <a href="#"><img src="http://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%;max-height: 250px;">
+                <div class="text">Test 1</div>
+            </a>
+        </div>
+
+        <div class="mySlides fade" style="display: none;">
+            <a href="#"><img src="http://www.w3schools.com/howto/img_nature_wide.jpg" style="width:100%;max-height: 250px;">
+                <div class="text">Test 2</div>
+            </a>
+        </div>
+
+        <div class="mySlides fade" style="display: none;">
+            <a href="#"><img src="http://www.w3schools.com/howto/img_fjords_wide.jpg" style="width:100%;max-height: 250px;">
+                <div class="text">Test 3</div>
+            </a>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">
+            <div style="position: absolute; top: 50%; left: 30%">&#10094;</div>
+        </a>
+        <a class="next" onclick="plusSlides(1)">
+            <div style="position: absolute; top: 50%; right: 30%">&#10095;</div>
+        </a>
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot actived" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+        <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+
+	<nav>
+		<a href="soutien_maths/soutien_maths_index.html" class="menu menu_lycee">Soutien maths</a>
+		<a href="club_maths/club_maths_index.html" class="menu menu_prepa">Club de maths</a>
+		<a href="liens.html" class="menu menu_about">Liens utiles</a>
+		<a href="..\index.html" class="menu menu_contact">Retour</a>
+	</nav>
+
+	<footer>
+		<p>Sami FARIH - 2018 - <a href="..\index.html">www.x-corot.github.io</a></p>
+	</footer>
+	<p class="bug"><a href="mailto:sami.farih@polytechnique.edu?subject=Bug (X-Corot)">Signaler un bug</a> - version 1.1 réalisée avec HTML5 et CSS3</p>
+</body>
+</html>

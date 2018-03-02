@@ -1,0 +1,171 @@
+\documentclass[a4paper,11pt]{article}
+
+%-----------------------------------------------------------------
+
+%Packages utilisés
+\usepackage{amsmath, amssymb, amsthm}	%Packages mathématiques
+\usepackage[utf8]{inputenc}				%Encodage UTF8
+\usepackage[francais]{babel}				%Typographie française
+\usepackage{fourier}						%Police Fourier
+\usepackage{fancyhdr}					%En-tête personnalisé
+\usepackage[margin=.8in]{geometry}		%Modification des marges
+\usepackage[usenames, dvipsnames]{color, xcolor}	%Ajout de couleurs
+\usepackage{titlesec}					%Formattage des titres
+
+%Personnalisation de l'en-tête/pied de page
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+	%En-tête
+	\fancyhead[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth} {\headheight}
+		}%
+	  	\sffamily{\color{gris}{ Lycée J-B Corot}}
+	}
+	\fancyhead[C]{\sffamily{\color{gris}{MP}}}
+	
+	%Insérer le titre ICI
+	\fancyhead[R]{\sffamily{\color{gris}{Espaces hermitiens}}}
+	%--------------------------------------------------
+	
+	%Pied de page
+	\fancyfoot[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth}{\headheight}
+		}%
+	  	\sffamily{\color{gris}{}}
+	}
+	\fancyfoot[C]{%
+		\strut\rlap{
+			\rule[-\dp\strutbox]{\headwidth}{0pt}
+		}%
+	  	\sffamily{\color{gris}{\thepage}}
+	}
+	\fancyfoot[R]{\sffamily{\color{gris}{}}}
+	
+%Nouvelles commandes
+	%Couleurs
+	\definecolor{gris}{HTML}{EEEEEE}
+	\definecolor{vert1}{HTML}{6AB7C3}
+	
+	%Numérotation
+	\renewcommand{\labelenumi}{\sffamily{\textbf{\color{vert1}\theenumi.}}}
+	\renewcommand{\labelenumii}{\sffamily{\textbf{\color{vert1}\theenumii.}}}
+	\renewcommand{\labelenumiii}{\sffamily{\textbf{\color{vert1}\theenumiii.}}}
+	
+	%Mathématiques
+	\newcommand{\N}{\mathbf{N}}
+	\newcommand{\Z}{\mathbf{Z}}
+	\newcommand{\R}{\mathbf{R}}
+	\newcommand{\C}{\mathbf{C}}
+	\newcommand{\Q}{\mathbf{Q}}
+	\newcommand{\K}{\mathbf{K}}
+	\newcommand{\U}{\mathbf{U}}
+	\renewcommand{\P}{\mathbf{P}}
+	\newcommand{\D}{\mathcal{D}}
+	\newcommand{\E}{\mathbf{E}}
+	\newcommand{\M}{\mathcal{M}}
+	\newcommand{\B}{\mathcal{B}}
+	\newcommand{\CC}{\mathcal{C}}
+	\renewcommand{\L}{\mathcal{L}}
+	\newcommand{\suite}[2]{{\left({#1}_{#2}\right)}_{#2}}
+	
+	%Titre
+	\newcommand{\titre}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			\center{\Large{\sffamily\bfseries{\color{gris}{#1}}}}\\
+			\vspace*{1em}
+		}}
+	}
+	
+	%Corrigé
+	\newcommand{\corrige}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			{\sffamily\bfseries{\color{gris}{Théorème}}}\par
+			{#1}\\
+		}
+		}
+		
+	}
+	
+	%Exercices
+	\newcounter{exo}
+	\newcommand{\exo}{
+	\addtocounter{exo}{1}
+	\medskip\medskip \noindent {
+		\sffamily{{\color{vert1}\textbf{Exercice \theexo\ }}}
+	}\smallskip
+	}
+	
+	%Fin
+	\newcommand{\fin}{
+	\begin{center}
+	\vspace*{2em}
+	{\color{vert1}\rule{5cm}{0.2pt}}\\
+	\vspace*{1em}
+			\sffamily\bfseries{\color{vert1}{FIN DU SUJET}}
+	\end{center}
+	}
+	
+	%Formattage des titres
+	\renewcommand{\thesection}{\Roman{section}}
+	\renewcommand{\thesubsection}{\Alph{subsection}}
+	\titleformat{\section}
+  		{\normalfont\sffamily\Large\bfseries\color{vert1}}
+  		{\thesection .}{1em}{}
+  	\titleformat{\subsection}
+  		{\normalfont\sffamily\large\bfseries\color{vert1}}
+  		{\hspace{2em}\thesubsection .}{.5em}{}
+
+%Autres
+\setlength\parindent{0pt}	%Pas d'indentation des paragraphes 
+
+%-----------------------------------------------------------------
+
+\begin{document}
+\thispagestyle{empty}				%Pas d'en-tête sur la page 1
+\pagecolor{gris}						%Couleur de fond
+\titre{Espaces hermitiens}			%Titre du document
+\vspace*{1em}
+
+\section*{Introduction}
+Dans le cadre du programme de MP/PC, nous étudions les propriétés des espaces euclidiens, c'est-à-dire des $\R$-espaces vectoriels de dimension finie, munis d'un produit scalaire. Il est donc naturel de nous demander si ces propriétés subsistent dans un $\C$-espace vectoriel. Prenons pour cela un exemple simple: considérons $\C$ comme un $\C$-espace vectoriel et munissons-le, naïvement, du "produit scalaire"
+\begin{align*}
+\varphi:\ &\C^2\rightarrow\C\\
+&(x,y)\mapsto xy.
+\end{align*}
+Il est facile de vérifier qu'il s'agit d'une forme bilinéaire, symétrique définie. Cependant, $\varphi(x,x)$ n'a aucune raison d'être positif, contrairement à ce qui se passerait dans $\R$. On pourrait alors penser à redéfinir $\varphi$, de telle sorte à rendre cette quantité positive. L'idée la plus naturelle est de définir
+\begin{align*}
+\psi:\ &\C^2\rightarrow\C\\
+&(x,y)\mapsto \overline{x}y.
+\end{align*} 
+Dès lors, pour tout $x\in\C$, $\psi(x,x)=\vert x\vert^2\geq 0$. Regradons toutefois si les autres propriétés du produit scalaire sont restées intactes. Bien que le caractère défini de l'application reste inchangé, il est clair que cette dernière est loin d'être symétrique. Plus encore, elle n'est même plus bilinéaire, car, pour $\lambda,x,y\in\C$, \[\psi(\lambda x,y)=\overline{\lambda}\psi(x,y).\]
+Bref, il est clair que les choses ne se passent pas vraiment comme dans $\R$. Nous verrons donc comment définir les différents objets dans un $\C$-espace vectoriel afin de déterminer des propriétés similaires à celles dans $\R$. De plus, en mathématiques, plus les définitions sont compliquées, plus les résultats sont forts. En outre, nous trouverons des propriétés vraies pour les $\C$-espaces vectoriels qui s'avèrent complètement fausses dans les $\R$-espaces vectoriels.
+
+\section{Formes sesquilinéaires}
+\subsection{Définition}
+Soit $E$ un $\C$-espace vectoriel de dimension finie et $\varphi:\ E\times E\rightarrow\C$. On dit que $\varphi$ est une {\sffamily\color{vert1}forme sesquilinéaire} sur $E$ si $\varphi$ vérifie les propriétés suivantes:
+\begin{enumerate}
+\item Pour tout $a\in E$, l'application $y\in E\mapsto\varphi(a,y)$ est linéaire:
+\[\forall x,y\in E,\ \forall\lambda\in\C,\ \varphi(a,\lambda x+y)=\lambda\varphi(a,x)+\varphi(a,y).\]
+\item Pour tout $b\in E$, l'application $y\in E\mapsto\varphi(y,b)$ est semi-linéaire:
+\[\forall x,y\in E,\ \forall\lambda\in\C,\ \varphi(\lambda x+y,b)=\overline{\lambda}\varphi(x,b)+\varphi(y,b).\]
+\end{enumerate}
+Cette définition est moins puissante que celle d'une forme bilinéaire, d'où le nom de forme sesquilinéaire (\textit{sesqui} signifie "un et demi"). Le lecteur pourra notamment vérifier que l'unique forme sesquilinéaire et bilinéaire est l'application nulle.
+
+\subsection{Exemples}
+Pour chacun des exemples suivants, vérifier que l'on définit bien une forme sesquilinéaire sur $E$.
+\begin{enumerate}
+\item Soit, $\varphi$, $\psi$ deux formes linéaires sur $E$. L'application \[(x,y)\in E^2\mapsto\overline{\varphi(x)}\psi(y)\] est une forme sesquilinéaire sur $E$.
+\item Soit $E$ le $\C$-espace vectoriel des fonctions continues de $[0,1]$ dans $\C$. L'application \[(f,g)\in E^2\mapsto\displaystyle\int_{0}^1\overline{f(t)}g(t)\mathrm{d}t\] est une forme sesquilinéaire sur $E$.
+\item Soit $(e_1,\cdots, e_n)$ une base de $E$. Soit $x=\lambda_1e_1+\cdots+\lambda_ne_n,y=\mu_1e_1+\cdots+\mu_ne_n\in E$. L'application $\varphi$ définie par  \[\varphi(x,y)=\overline{\lambda_1}\mu_1+\cdots+\overline{\lambda_n}\mu_n\] est une forme sesquilinéaire sur $E$.
+\end{enumerate}
+
+\section{Produit scalaire hermitien}
+\subsection{Définition}
+
+\end{document}

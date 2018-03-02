@@ -1,0 +1,343 @@
+html {
+    background-color: #EEEEEE;
+}
+
+.banner {
+	font-family: 'Josefin Sans';
+	font-size: 4em;
+	color: #EEEEEE;
+	background-color: #E37222;
+	text-align: center;
+	margin-top: .2em;
+	margin-bottom: .8em;
+	padding-top: .2em;
+	padding-bottom: .2em;
+}
+
+.banner a img {
+	float: right;
+	margin-right: 2%;
+}
+nav {
+	position: relative;
+	display: block;
+}
+
+.menu {
+	position: relative;
+	display: inline-block;
+	width: 49%;
+	height: 200px;
+	margin-top: 2%;
+
+	text-align: center;
+	text-decoration: none;
+	color: #EEEEEE;
+	line-height: 200px;
+	font-family: 'Josefin Sans';
+	font-size: 2.5em;
+
+	transition: .5s;
+}
+
+.menu_pb {
+	background-color: #EEAA7A;
+	width: 98%;
+	font-size: 1em;
+	text-align: left;
+	padding-left: 2%;
+	height: 60px;
+	line-height: 60px;
+}
+
+.menu_pb:hover {
+	font-size: 1em;
+	background-color: #FFBB8B;
+}
+
+.retour_contact {
+	text-decoration: none;
+	font-family: 'Josefin Sans';
+	color: #E37222;
+	float: right;
+	margin-right: 2%;
+	size: .8em;
+
+	transition: .5s;
+}
+
+.retour_contact:hover {
+	transition: .5s;
+	color: #F48333;
+}
+
+.menu:hover {
+	font-size: 3em;
+
+	transition: .5s;
+}
+
+.menu_prepa {
+	float: right;
+ 	background-color: #EEAA7A;
+}
+
+.menu_prepa:hover {
+	background-color: #FFBB8B;
+}
+
+.menu_lycee {
+	float: left;
+	background-color: #E37222;
+}
+
+.menu_lycee:hover {
+	background-color: #F48333;
+}
+
+.menu_about {
+	float: left;
+	background-color: #EEAA7A;
+}
+
+.menu_about:hover {
+	background-color: #FFBB8B;
+}
+
+.menu_contact {
+	float: right;
+	background-color: #E37222;
+}
+
+.menu_contact:hover {
+	background-color: #F48333;
+}
+
+footer {
+	margin-top: 1em;
+	width: 100%;
+	display: inline-block;
+	position: relative;
+	background-color: #DDDDDD;
+
+	text-align: center;
+	font-family: 'Josefin Sans';
+}
+
+.bug {
+	font-size: .5em;
+	font-family: 'Josefin Sans';
+	float: right;
+}
+
+.bug a {
+	text-decoration: none;
+	color: #666666;
+	transition: .5s;
+}
+
+.bug a:hover {
+	color: #444444;
+	transition: .5s;
+}
+
+.exercice {
+	font-family: 'Josefin Sans';
+	background-color: #DDDDDD;
+	color: #E37222;
+
+	margin: 2%;
+	padding: 2%;
+}
+
+.indication {
+	background-color: #AAAAAA;
+}
+
+.indication:actived {
+	color: #000000;
+}
+
+footer a {
+	text-decoration: none;
+	color: #666666;
+	transition: .5s;
+}
+
+footer a:hover {
+	color: #444444;
+	transition: .5s;
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+	.menu {
+		height: 150px;
+		line-height: 150px;
+
+		font-size: 2em;
+	}
+
+	.menu:hover {
+		font-size: 2.5em;
+	}
+
+	.mySlides a img {
+		height: 150px;
+	}
+}
+
+/* Slideshow container */
+
+.slideshow-container {
+    display: inline-block;
+    position: relative;
+    margin-top: 1px;
+    width: 100%;
+    max-height: 300px;
+    background-color: #FFBB8B;
+}
+/* Next & previous buttons */
+
+.prev,
+.next {
+    cursor: pointer;
+    position: absolute;
+    top: 0%;
+    bottom: 50px;
+    height: auto;
+    width: auto;
+    padding: 16px;
+    color: #E37222;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+}
+/* Position the "next button" to the right */
+
+.next {
+    right: 0;
+    border-radius: 0px 0 0 0px;
+}
+/* On hover, add a black background color with a little bit see-through */
+
+.prev:hover,
+.next:hover {
+    background-color: #EEEEEE;
+    opacity: .7;
+}
+/* Caption text */
+
+.text {
+    transition: background .7s;
+    visibility: hidden;
+    color: #E37222;
+    font-size: 20px;
+    font-family: verdana;
+    position: absolute;
+    bottom: 0%;
+    height: 50px;
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.slideshow-container:hover .text {
+    visibility: visible;
+    background-color: #EEEEEE;
+    opacity: .7;
+    transition: background .7s;
+}
+/* Number text (1/3 etc) */
+
+.numbertext {
+    color: #f2f2f2;
+    font-size: 12px;
+    padding: 8px 12px;
+    position: absolute;
+    top: 0;
+}
+/* The dots/bullets/indicators */
+
+.dot {
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #FFBB8B;
+    opacity: .5;
+    border-radius: 0%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+.actived,
+.dot:hover {
+	opacity: 1;
+    background-color: #E37222;
+}
+
+.question {
+	margin-left: 1em;
+}
+/* Fading animation */
+
+.indication {
+	position: relative;
+	background-color: #CCCCCC;
+	padding: 2%;
+	max-height: 5px;
+	overflow: hidden;
+	margin: 1%;
+	transition-timing-function: cubic-bezier(0, 0.5, 0.5, 0.5);
+	transition: 3s;
+}
+
+.indication:hover {
+	max-height: 1000px;
+}
+
+.indication_contenu {
+	text-align: justify;
+	color: #000000;
+	padding-left: 2%;
+}
+
+.retour {
+	text-decoration: none;
+	font-family: 'Josefin Sans';
+	color: #E37222;
+	float: right;
+	margin-right: 2%;
+	margin-bottom: 3%;
+	margin-top: -1%;
+	size: .8em;
+
+	transition: .5s;
+}
+
+.retour:hover {
+	transition: .5s;
+	color: #F48333;
+}
+
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 2s;
+    animation-name: fade;
+    animation-duration: 2s;
+}
+@-webkit-keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}
+@keyframes fade {
+    from {
+        opacity: .4
+    }
+    to {
+        opacity: 1
+    }
+}

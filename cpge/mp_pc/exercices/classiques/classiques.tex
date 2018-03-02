@@ -1,0 +1,140 @@
+\documentclass[a4paper,11pt]{article}
+
+%-----------------------------------------------------------------
+
+%Packages utilisés
+\usepackage{amsmath, amssymb, amsthm}	%Packages mathématiques
+\usepackage[utf8]{inputenc}				%Encodage UTF8
+\usepackage[francais]{babel}				%Typographie française
+\usepackage{fourier}						%Police Fourier
+\usepackage{fancyhdr}					%En-tête personnalisé
+\usepackage[margin=.8in]{geometry}		%Modification des marges
+\usepackage[usenames, dvipsnames]{color, xcolor}	%Ajout de couleurs
+\usepackage{titlesec}					%Formattage des titres
+
+%Personnalisation de l'en-tête/pied de page
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+	%En-tête
+	\fancyhead[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth} {\headheight}
+		}%
+	  	\sffamily{\color{gris}{ Lycée J-B Corot}}
+	}
+	\fancyhead[C]{\sffamily{\color{gris}{MP}}}
+	
+	%Insérer le titre ICI
+	\fancyhead[R]{\sffamily{\color{gris}{Exercices classiques}}}
+	%--------------------------------------------------
+	
+	%Pied de page
+	\fancyfoot[L]{%
+		\strut\rlap{
+			\color{vert1}
+			\rule[-\dp\strutbox]{\headwidth}{\headheight}
+		}%
+	  	\sffamily{\color{gris}{}}
+	}
+	\fancyfoot[C]{%
+		\strut\rlap{
+			\rule[-\dp\strutbox]{\headwidth}{0pt}
+		}%
+	  	\sffamily{\color{gris}{\thepage}}
+	}
+	\fancyfoot[R]{\sffamily{\color{gris}{}}}
+	
+%Nouvelles commandes
+	%Couleurs
+	\definecolor{gris}{HTML}{EEEEEE}
+	\definecolor{vert1}{HTML}{6AB7C3}
+	
+	%Numérotation
+	\renewcommand{\labelenumi}{\sffamily{\textbf{\color{vert1}\theenumi.}}}
+	\renewcommand{\labelenumii}{\sffamily{\textbf{\color{vert1}\theenumii.}}}
+	\renewcommand{\labelenumiii}{\sffamily{\textbf{\color{vert1}\theenumiii.}}}
+	
+	%Mathématiques
+	\newcommand{\N}{\mathbf{N}}
+	\newcommand{\Z}{\mathbf{Z}}
+	\newcommand{\R}{\mathbf{R}}
+	\newcommand{\C}{\mathbf{C}}
+	\newcommand{\Q}{\mathbf{Q}}
+	\newcommand{\K}{\mathbf{K}}
+	\newcommand{\U}{\mathbf{U}}
+	\renewcommand{\P}{\mathbf{P}}
+	\newcommand{\D}{\mathcal{D}}
+	\newcommand{\E}{\mathbf{E}}
+	\newcommand{\M}{\mathcal{M}}
+	\newcommand{\B}{\mathcal{B}}
+	\newcommand{\CC}{\mathcal{C}}
+	\renewcommand{\L}{\mathcal{L}}
+	\newcommand{\suite}[2]{{\left({#1}_{#2}\right)}_{#2}}
+	
+	%Titre
+	\newcommand{\titre}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			\center{\Large{\sffamily\bfseries{\color{gris}{#1}}}}\\
+			\vspace*{1em}
+		}}
+	}
+	
+	%Corrigé
+	\newcommand{\corrige}[1]{
+		\colorbox{vert1}{
+		\parbox{\headwidth}{
+			{\sffamily\bfseries{\color{gris}{Théorème}}}\par
+			{#1}\\
+		}
+		}
+		
+	}
+	
+	%Exercices
+	\newcounter{exo}
+	\newcommand{\exo}{
+	\addtocounter{exo}{1}
+	\medskip\medskip \noindent {
+		\sffamily{{\color{vert1}\textbf{Exercice \theexo\ }}}
+	}\smallskip
+	}
+	
+	%Fin
+	\newcommand{\fin}{
+	\begin{center}
+	\vspace*{2em}
+	{\color{vert1}\rule{5cm}{0.2pt}}\\
+	\vspace*{1em}
+			\sffamily\bfseries{\color{vert1}{FIN DU SUJET}}
+	\end{center}
+	}
+	
+	%Formattage des titres
+	\renewcommand{\thesection}{\Roman{section}}
+	\renewcommand{\thesubsection}{\Alph{subsection}}
+	\titleformat{\section}
+  		{\normalfont\sffamily\Large\bfseries\color{vert1}}
+  		{\thesection .}{1em}{}
+  	\titleformat{\subsection}
+  		{\normalfont\sffamily\large\bfseries\color{vert1}}
+  		{\hspace{2em}\thesubsection .}{.5em}{}
+
+%Autres
+\setlength\parindent{0pt}	%Pas d'indentation des paragraphes 
+
+%-----------------------------------------------------------------
+
+\begin{document}
+\thispagestyle{empty}				%Pas d'en-tête sur la page 1
+\pagecolor{gris}						%Couleur de fond
+\titre{Exercices classiques}			%Titre du document
+\vspace*{1em}
+
+\exo
+
+Soit $n$ un entier au moins égal à $2$. Montrer que l’équation
+\[x^n-x^{n-1}-\cdots-x-1=0\]
+possède au plus une solution strictement positive $x_n$.
+\end{document}
