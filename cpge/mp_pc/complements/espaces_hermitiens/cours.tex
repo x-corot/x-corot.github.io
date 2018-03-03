@@ -9,8 +9,12 @@
 \usepackage{fourier}						%Police Fourier
 \usepackage{fancyhdr}					%En-tête personnalisé
 \usepackage[margin=.8in]{geometry}		%Modification des marges
-\usepackage[usenames, dvipsnames]{color, xcolor}	%Ajout de couleurs
+\usepackage{framed}
+\usepackage[usenames, dvipsnames]{color}	%Ajout de couleurs
+\usepackage{enumitem}
+\usepackage[svgnames]{xcolor}
 \usepackage{titlesec}					%Formattage des titres
+\usepackage[tikz]{bclogo}						%Boîtes
 
 %Personnalisation de l'en-tête/pied de page
 \pagestyle{fancy}
@@ -48,7 +52,13 @@
 %Nouvelles commandes
 	%Couleurs
 	\definecolor{gris}{HTML}{EEEEEE}
+	\definecolor{gris2}{HTML}{DDDDDD}
 	\definecolor{vert1}{HTML}{6AB7C3}
+	\definecolor{vert2}{HTML}{19aa19}
+	\definecolor{bleu}{HTML}{2a73bb}
+	\definecolor{jaune}{HTML}{bb972a}
+	\definecolor{noir}{HTML}{444444}	
+	\definecolor{rouge}{HTML}{bb2a2a}	
 	
 	%Numérotation
 	\renewcommand{\labelenumi}{\sffamily{\textbf{\color{vert1}\theenumi.}}}
@@ -121,6 +131,28 @@
   		{\normalfont\sffamily\large\bfseries\color{vert1}}
   		{\hspace{2em}\thesubsection .}{.5em}{}
 
+	\newenvironment{gbar}[1]{%
+		\def\FrameCommand{{\color{#1}\vrule width 3pt }
+		\colorbox{gris2}} %
+		\MakeFramed{\advance\hsize -\width\FrameRestore}} %
+		{\endMakeFramed}
+	
+	\newenvironment{cadre}[2]{
+		\begin{bclogo}[couleur = gris , barre = none , noborder = true , logo=\vspace{1em}]{
+			\hspace{.14em}
+			\colorbox{#1}{
+				\parbox{15em}{
+				\sffamily\normalsize{\color{gris}#2}
+			}}
+			\vspace{.2em}
+		}
+			\begin{gbar}{#1}
+	}
+	{
+			\end{gbar}
+		\end{bclogo}
+	}
+		
 %Autres
 \setlength\parindent{0pt}	%Pas d'indentation des paragraphes 
 
@@ -143,29 +175,224 @@ Il est facile de vérifier qu'il s'agit d'une forme bilinéaire, symétrique dé
 \psi:\ &\C^2\rightarrow\C\\
 &(x,y)\mapsto \overline{x}y.
 \end{align*} 
-Dès lors, pour tout $x\in\C$, $\psi(x,x)=\vert x\vert^2\geq 0$. Regradons toutefois si les autres propriétés du produit scalaire sont restées intactes. Bien que le caractère défini de l'application reste inchangé, il est clair que cette dernière est loin d'être symétrique. Plus encore, elle n'est même plus bilinéaire, car, pour $\lambda,x,y\in\C$, \[\psi(\lambda x,y)=\overline{\lambda}\psi(x,y).\]
-Bref, il est clair que les choses ne se passent pas vraiment comme dans $\R$. Nous verrons donc comment définir les différents objets dans un $\C$-espace vectoriel afin de déterminer des propriétés similaires à celles dans $\R$. De plus, en mathématiques, plus les définitions sont compliquées, plus les résultats sont forts. En outre, nous trouverons des propriétés vraies pour les $\C$-espaces vectoriels qui s'avèrent complètement fausses dans les $\R$-espaces vectoriels.
+Dès lors, pour tout $x\in\C$, $\psi(x,x)=\vert x\vert^2\geq 0$. Regardons toutefois si les autres propriétés du produit scalaire sont restées intactes. Bien que le caractère défini de l'application reste inchangé, il est clair que cette dernière est loin d'être symétrique. Plus encore, elle n'est même plus bilinéaire, car, pour $\lambda,x,y\in\C$, \[\psi(\lambda x,y)=\overline{\lambda}\psi(x,y).\]
+Bref, il est clair que les choses ne se passent pas vraiment comme dans $\R$. Nous verrons donc comment définir les différents objets dans un $\C$-espace vectoriel afin de déterminer des propriétés similaires à celles dans $\R$. Nous trouverons d'autre part des propriétés vraies pour les $\C$-espaces vectoriels qui s'avèrent complètement fausses dans les $\R$-espaces vectoriels.
 
 \section{Formes sesquilinéaires}
-\subsection{Définition}
-Soit $E$ un $\C$-espace vectoriel de dimension finie et $\varphi:\ E\times E\rightarrow\C$. On dit que $\varphi$ est une {\sffamily\color{vert1}forme sesquilinéaire} sur $E$ si $\varphi$ vérifie les propriétés suivantes:
-\begin{enumerate}
+\begin{cadre}{bleu}{Définition}
+Soit $E$ un $\C$-espace vectoriel de dimension finie et $\varphi:\ E\times E\rightarrow\C$. On dit que $\varphi$ est une {\sffamily\color{bleu}forme sesquilinéaire} sur $E$ si $\varphi$ vérifie les propriétés suivantes:
+\begin{itemize}[label={\color{bleu}•}]
 \item Pour tout $a\in E$, l'application $y\in E\mapsto\varphi(a,y)$ est linéaire:
 \[\forall x,y\in E,\ \forall\lambda\in\C,\ \varphi(a,\lambda x+y)=\lambda\varphi(a,x)+\varphi(a,y).\]
 \item Pour tout $b\in E$, l'application $y\in E\mapsto\varphi(y,b)$ est semi-linéaire:
 \[\forall x,y\in E,\ \forall\lambda\in\C,\ \varphi(\lambda x+y,b)=\overline{\lambda}\varphi(x,b)+\varphi(y,b).\]
-\end{enumerate}
+\end{itemize}
+\end{cadre}
+\begin{cadre}{noir}{Remarque}
 Cette définition est moins puissante que celle d'une forme bilinéaire, d'où le nom de forme sesquilinéaire (\textit{sesqui} signifie "un et demi"). Le lecteur pourra notamment vérifier que l'unique forme sesquilinéaire et bilinéaire est l'application nulle.
+\end{cadre}
 
-\subsection{Exemples}
 Pour chacun des exemples suivants, vérifier que l'on définit bien une forme sesquilinéaire sur $E$.
-\begin{enumerate}
-\item Soit, $\varphi$, $\psi$ deux formes linéaires sur $E$. L'application \[(x,y)\in E^2\mapsto\overline{\varphi(x)}\psi(y)\] est une forme sesquilinéaire sur $E$.
-\item Soit $E$ le $\C$-espace vectoriel des fonctions continues de $[0,1]$ dans $\C$. L'application \[(f,g)\in E^2\mapsto\displaystyle\int_{0}^1\overline{f(t)}g(t)\mathrm{d}t\] est une forme sesquilinéaire sur $E$.
-\item Soit $(e_1,\cdots, e_n)$ une base de $E$. Soit $x=\lambda_1e_1+\cdots+\lambda_ne_n,y=\mu_1e_1+\cdots+\mu_ne_n\in E$. L'application $\varphi$ définie par  \[\varphi(x,y)=\overline{\lambda_1}\mu_1+\cdots+\overline{\lambda_n}\mu_n\] est une forme sesquilinéaire sur $E$.
-\end{enumerate}
+\begin{cadre}{vert2}{Exemple 1}
+ Soit, $\varphi$, $\psi$ deux formes linéaires sur $E$. L'application \[(x,y)\in E^2\mapsto\overline{\varphi(x)}\psi(y)\] est une forme sesquilinéaire sur $E$.
+\end{cadre}
+\begin{cadre}{vert2}{Exemple 2}
+Soit $E$ le $\C$-espace vectoriel des fonctions continues de $[0,1]$ dans $\C$. L'application \[(f,g)\in E^2\mapsto\displaystyle\int_{0}^1\overline{f(t)}g(t)\mathrm{d}t\] est une forme sesquilinéaire sur $E$.
+\end{cadre}
+\begin{cadre}{vert2}{Exemple 3}
+Soit $(e_1,\cdots, e_n)$ une base de $E$. Soit $x=\lambda_1e_1+\cdots+\lambda_ne_n,y=\mu_1e_1+\cdots+\mu_ne_n\in E$. L'application $\varphi$ définie par  \[\varphi(x,y)=\overline{\lambda_1}\mu_1+\cdots+\overline{\lambda_n}\mu_n\] est une forme sesquilinéaire sur $E$.
+\end{cadre}
 
 \section{Produit scalaire hermitien}
-\subsection{Définition}
 
+\begin{cadre}{bleu}{Définition}
+Soient $E$ un $\C$-espace vectoriel et $\varphi$ une forme sesquilinéaire sur $E$. On dit que $\varphi$ est {\sffamily\textbf{\color{bleu}hermitienne}} si, pour tous $x,y\in E$,
+\[\varphi(y,x)=\overline{\varphi(x,y)}.\]
+\end{cadre}
+
+\begin{cadre}{jaune}{Exercice}
+Soient $E$ un $\C$-espace vectoriel, $(e_1,\cdots,e_n)$ une base de $E$ et $\varphi$ une forme sesquilinéaire sur $E$. On note $A=\left(a_{i,j}\right)$, avec $a_{i,j}=\varphi\left(e_i,e_j\right)$ pour $1\leq i,j\leq n$, puis $A^*={}^t\overline{A}=\left(\overline{a_{j,i}}\right)$.\\
+
+Montrer que $\varphi$ est hermitienne si, et seulement si, $A=A^*$.
+\end{cadre}
+
+\begin{cadre}{noir}{Remarque}
+Si $\varphi$ est une forme hermitienne sur $E$, alors, pour tout $x\in E$, $\varphi(x,x)\in\R$.
+\end{cadre}
+
+\begin{cadre}{bleu}{Définition}
+Soient $E$ un $\C$-espace vectoriel et $\varphi$ une forme hermitienne sur $E$. On dit que $\varphi$ est {\sffamily\textbf{\color{bleu}positive}} (resp. {\sffamily\textbf{\color{bleu} définie positive}}) si, pour tout $x\in E$,
+$\varphi(x,x)\geq 0$ (resp. $\varphi(x,x)\geq 0\text{ et } \varphi(x,x)=0\Leftrightarrow x=0$).
+\end{cadre}
+
+\begin{cadre}{bleu}{Définition}
+On appelle {\sffamily\textbf{\color{bleu} produit scalaire}} sur un $\C$-espace vectoriel $E$ toute forme hermitienne définie positive. Un tel espace vectoriel (de dimension finie) est alors appelé {\sffamily\textbf{\color{bleu} espace hermitien}}.
+\end{cadre}
+Nous avons ainsi généralisé la notion de produit scalaire aux $\C$-espaces vectoriels. Bien que nous ayons perdu (il le fallait bien...) le caractère bilinéaire du produit scalaire, nous verrons qu'une telle définition apporte son lot de propriétés intéressantes.
+
+\section{Premières propriétés}
+Dans la suite, $E$ est un espace hermitien. Si $x,y\in E$, on note $(x\vert y)$ le produit scalaire de $x$ et $y$ (dans cet ordre). On peut alors considérer $\Vert x\Vert=(x\vert x)$, pour tout $x\in E$.
+
+\begin{cadre}{rouge}{Proposition}
+Soient $x,y\in E$ et $\lambda\in\C$. Alors,
+\begin{itemize}[label={\color{rouge}•}]
+\item $\Vert\lambda x\Vert=\vert\lambda\vert\Vert x\Vert$
+\item $\Vert x+y\Vert^2=\Vert x\Vert^2+2\mathrm{Re}(xy)+\Vert y\Vert^2$
+\item $\vert(x\vert y)\vert\leq\Vert x\Vert\Vert y\Vert$ (inégalité de Cauchy-Schwarz)
+\item $\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert$ (inégalité triangulaire)
+\item $2\left(\Vert x\Vert+\Vert y\Vert\right)=\Vert x+y\Vert^2+\Vert x-y\Vert^2$ (identité du parallélogramme)
+\end{itemize}
+\end{cadre}
+
+Toutes les autres définitions (orthogonalité, orthonormalité, ...) restent les mêmes que dans les espaces euclidiens. On peut alors appliquer le procédé de Gram-Schmidt à une famille de vecteurs de $E$ afin de l'orthonormaliser, ou compléter une famille orthonormée (donc libre) de $E$ en une base orthonormée de $E$.
+
+\section{Adjoint d'un endomorphisme}
+\begin{cadre}{rouge}{Théorème}
+Soit $u\in\L(E)$. Il existe un unique endomorphisme, noté $u^*$ et appelé l'{\sffamily\textbf{\color{rouge}adjoint}} de $u$, tel que, pour tous $x,y\in E$,
+\[(u(x)\vert y)=(x\vert u^*(y)).\]
+\end{cadre}
+\begin{cadre}{jaune}{Exercice 1}
+L'objectif de cet exercice est de démontrer le théorème précédent. On note pour cela $E^*$ l'espace des formes linéaires de $E$ et on considère l'application
+\[\Phi:\ y\in E\mapsto\phi_y\]
+où l'on définit $\phi_y:\ x\in E\mapsto (x\vert y)$, pour tout $y\in E$.
+\begin{enumerate}[label=\sffamily\textbf{\color{jaune}\theenumi .}]
+\item Montrer que $\Phi$ est bijective.
+\item On fixe $y\in E$. Montrer qu'il existe un unique élément de $E$, noté $u^*(y)$, tel que, pour tout $x\in E$,
+\[(u(x)\vert y)=(x\vert u^*(y)).\]
+\item Montrer que l'application $u^*$ ainsi définie est linéaire.
+\end{enumerate}
+\end{cadre}
+
+\begin{cadre}{jaune}{Exercice 2}
+Soit $u\in\L(E)$ et $F$ un sous-espace de $E$ stable par $u$. Montrer que $F^\perp$ est stable par $u^*$.
+\end{cadre}
+
+\begin{cadre}{jaune}{Exercice 3}
+Soient $\B$ une base de $E$, $u\in\L(E)$, $A=\mathrm{Mat}_\B(u)$ et $A^*=\mathrm{Mat}_\B(u^*)$. Montrer que $A^*={}^t\overline{A}$.
+\end{cadre}
+On retrouve ici la notation matricielle adoptée en {\sffamily\color{vert1}\textbf{II.}}
+
+\section{Endomorphismes unitaires}
+\begin{cadre}{bleu}{Définition}
+Un endomorphisme $u$ est dit {\sffamily\textbf{\color{bleu}unitaire}} s'il est bijectif et si $u^{-1}=u^*$.
+
+Une matrice $A$ est dite {\sffamily\textbf{\color{bleu}unitaire}} si elle est inversible et si $A^{-1}=A^*$. On note $U(n)$ leur ensemble.
+\end{cadre}
+\begin{cadre}{jaune}{Exercice}
+Montrer que $U(n)$ est un sous-groupe de $\M_n(\C)$. On l'appelle  {\sffamily\textbf{\color{jaune}groupe unitaire de degré $n$}}.
+\end{cadre}
+\begin{cadre}{noir}{Remarque}
+Si $A\in U(n)$, alors $\vert\det A\vert^2=\det A\cdot\overline{\det A}=\det (A\overline{A})=\det (A{}^t\overline{A})=\det(AA^*)=1$, donc $\det A\in\U$, où $\U$ désigne l'ensemble des complexes de module $1$.
+\end{cadre}
+\begin{cadre}{bleu}{Définition}
+On appelle {\sffamily\textbf{\color{bleu}groupe spécial unitaire de degré $n$}} l'ensemble des éléments de $U(n)$ de déterminant $1$.
+\end{cadre}
+
+On définit de manière analogue $U(E)$, le groupe des endomorphismes unitaires de $E$, appelé groupe unitaire de $E$ et $SU(E)$, le groupe des endomorphismes unitaires de $E$ de déterminant $1$, appelé groupe spécial unitaire de $E$.
+
+\begin{cadre}{rouge}{Proposition}
+Soit $u\in\L(E)$. Les assertions suivantes sont équivalentes
+\begin{itemize}[label={\color{rouge}•}]
+\item $u$ est unitaire
+\item Pour tout $x\in E$, $\Vert u(x)\Vert=\Vert x\Vert$
+\item Pour tous $x,y\in E$, $(u(x)\vert u(y))=(x\vert y)$
+\item Il existe une base orthonormée $\B$ de $E$ telle que $\mathrm{Mat}_\B(u)\in U(n)$
+\item Pour toute base orthonormée $\B$ de $E$, $\mathrm{Mat}_\B(u)\in U(n)$
+\item Il existe une base orthonormée $(e_1,\cdots,e_n)$ de $E$ telle que $(u(e_1),\cdots,u(e_n))$ soit une base orthonormée de $E$
+\item Pour toute base orthonormée $(e_1,\cdots,e_n)$ de $E$ , $(u(e_1),\cdots,u(e_n))$ est une base orthonormée de $E$
+\end{itemize}
+\end{cadre}
+
+\begin{cadre}{noir}{Remarque}
+Les endomorphismes unitaires sont les analogues des endomorphismes orthogonaux pour les espaces hermitiens.
+\end{cadre}
+
+\begin{cadre}{rouge}{Proposition}
+Si $u\in U(E)$, alors 
+\begin{itemize}[label={\color{rouge}•}]
+\item Si $F$ est un sous-espace de $E$ stable par $u$, alors $F^\perp$ est stable par $u$
+\item $\mathrm{Sp}(u)\subset\U$
+\end{itemize}
+\end{cadre}
+Tout cela nous ammène au
+\begin{cadre}{rouge}{Théorème}
+Soit $u\in U(E)$. Il existe une base orthonormée de $E$, formée de vecteurs propres de $u$, et les valeurs propres de $u$ sont de module $1$.
+\end{cadre}
+On retrouve ici un théorème qui rappelle la représentation des endomorphismes orthogonaux (blocs de rotations). Cependant, on retrouve un résultat bien plus fort ici, car le théorème dit que les endomorphismes unitaires sont diagonalisables dans une base orthonormée (ce qui est complètement faux, en général, pour les endomorphismes orthogonaux).
+
+\section{Endomorphismes auto-adjoints}
+\begin{cadre}{bleu}{Définition}
+Un endomorphisme $u$ de $E$ est dit {\sffamily\color{blue}\textbf{auto-adjoint}} (ou {\sffamily\color{blue}\textbf{hermitien}}) s'il vérifie $u^*=u$. On note $\mathrm{Her}(E)$ leur ensemble.
+\end{cadre}
+
+\begin{cadre}{rouge}{Proposition}
+Soit $u\in\L(E)$. Les assertions suivantes sont équivalentes
+\begin{itemize}[label={\color{rouge}•}]
+\item $u$ est auto-adjoint
+\item Il existe une base orthonormée $\B$ de $E$ telle que $\mathrm{Mat}_\B(u)^*=\mathrm{Mat}_\B(u)$
+\item Pour toute base orthonormée $\B$ de $E$, $\mathrm{Mat}_\B(u)^*=\mathrm{Mat}_\B(u)$
+\item Pour tout $x\in E$, $(u(x)\vert x)\in\R$
+\item Il existe une base orthonormée de vecteurs propres de $u$, et toutes les valeurs propres de $u$ sont réelles
+\end{itemize}
+\end{cadre}
+On retrouve ici une analogie avec les endomorphismes symétriques et notamment pour la dernière assertion avec le théorème spectral.
+
+\begin{cadre}{jaune}{Exercice}
+{\sffamily\textbf{\color{jaune} Exercice classique, que l'on retrouve aussi dans le cas des espaces euclidiens}}
+
+Soit $u\in\mathrm{Her}(E)$. Notons $\lambda_1\leq\cdots\leq\lambda_n$ ses valeurs propres, rangées par ordre croissant. On considère $A=\left\lbrace\frac{(u(x)\vert x)}{\Vert x\Vert^2}\left|\right. x\in E\setminus\{0\}\right\rbrace$.\\
+
+Montrer que $\lambda_1=\min A$ et $\lambda_n=\max A$.
+\end{cadre}
+
+\section{Endomorphismes auto-adjoints positifs}
+\begin{cadre}{bleu}{Définition}
+On définit les ensembles suivants
+\begin{itemize}[label={\color{bleu}•}]
+\item $\mathrm{Her}^+(E)=\{u\in\mathrm{Her}(E)\ \vert\ \mathrm{Sp}(u)\subset\R^+\}$ (endomorphismes {\sffamily\color{blue}\textbf{auto-adjoints positifs}})
+\item $\mathrm{Her}^{++}(E)=\{u\in\mathrm{Her}(E)\ \vert\ \mathrm{Sp}(u)\subset\R^*_+\}$ (endomorphismes {\sffamily\color{blue}\textbf{auto-adjoints définis positifs}})
+\end{itemize}
+\end{cadre}
+
+On définit de même $\mathrm{Her}_n^+(\C)$ et $\mathrm{Her}_n^{++}(\C)$, respectivement l'ensemble des matrices auto-adjointes positives et des matrices auto-adjointes définies positives.
+
+\begin{cadre}{rouge}{Proposition}
+Soit $u\in\L(E)$. Les assertions suivantes sont équivalentes
+\begin{itemize}[label={\color{rouge}•}]
+\item $u\in\mathrm{Her}^+(E)$
+\item Pour tout $x\in E$, $(u(x)\vert x)\in\R^+$
+\item Il existe $v\in \L(E)$ tel que $u=v\circ v^*$
+\item Il existe $w\in \L(E)$ tel que $u=w^*\circ w$
+\end{itemize}
+\end{cadre}
+
+Quelques propriétés intéressantes des endomorphismes auto-adjoints positifs sont donnés sous forme d'exercices.
+
+\begin{cadre}{jaune}{Exercice 1}
+Soit $u,v\in\mathrm{Her}^+(E)$.
+\begin{enumerate}[label=\sffamily\textbf{\color{jaune}\theenumi .}]
+\item Montrer que, si $x\in E$, alors $x\in\ker u\Leftrightarrow (u(x)\vert x)=0$.
+\item Montrer que $\ker (u+v)=\ker u\cap\ker v$ et $\mathrm{Im}(u+v)=\mathrm{Im}u+\mathrm{Im}v$
+\item Soit $k\in\N^*$. Montrer qu'il existe un unique $w\in\mathrm{Her}^+(E)$ tel que $w^k=u$.
+\end{enumerate}
+\end{cadre}
+
+\begin{cadre}{jaune}{Exercice 2}
+Soient $A\in\mathrm{Her}_n^{++}(\C)$ et $B\in\mathrm{Her}_n(\C)$. Montrer qu'il existe $P\in U(n)$ telle que $P^*AP=I_n$ et $P^*BP$ soit diagonale.\\
+
+{\sffamily\color{jaune}\textbf{Indication:}} S'intéresser d'abord à $P^*AP=I_n$.
+\end{cadre}
+
+\begin{cadre}{jaune}{Exercice 3}
+{\sffamily\textbf{\color{jaune} Exercice classique, que l'on retrouve aussi dans le cas des espaces euclidiens}}
+
+Soit $u\in\L(E)$.
+\begin{enumerate}[label=\sffamily\textbf{\color{jaune}\theenumi .}]
+\item Montrer que $u^*\circ u$ et $u\circ u^*$ sont auto-adjoints positifs.
+\item Montrer que $\mathrm{Im}u=\mathrm{Im}(u\circ u^*)$ et $\ker u=\ker (u^*\circ u)$.
+\end{enumerate}
+\end{cadre}
+
+\section*{Conclusion}
+Nous avons ainsi réussi à définir la notion de produit scalaire dans les $\C$-espaces vectoriels de dimension finie. En outre, bien que nous ayons perdu son caractère linéaire (ce qui peut parfois compliquer certaines preuves), nous avons pu établir des analogies avec le cas réel et retrouver, voire généraliser, des propriétés déjà connues. Mieux encore, nous avons réussi à exhiber des caractéristiques propres aux espaces hermitiens, que l'on ne peut pas obtenir dans les espaces euclidiens. 
 \end{document}
